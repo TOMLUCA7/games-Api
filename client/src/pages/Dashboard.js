@@ -7,14 +7,16 @@ import {
   Form,
   Card,
   Table,
+  Modal,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/Header";
-import { FcPlus, FcEditImage } from "react-icons/fc";
+import { FcPlus, FcEditImage, FcNext } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import RowEdit from "../components/RowEdit";
+import { NavLink } from "react-router-dom";
 
 const Dashboard = (props) => {
   const [deviceName, setdeviceName] = useState("");
@@ -22,11 +24,17 @@ const Dashboard = (props) => {
   const [reviews, setreviews] = useState([]);
   const [gallery, setgallery] = useState([]);
   const [reviewsIsEditable, setReviewsIsEditable] = useState(false);
-  const [title, setTitle] = useState("");
-  const [review, setReview] = useState("");
   const [counter, setCounter] = useState(0);
+  const [rowItem, setRowItem] = useState({
+    title: "",
+    review: "",
+    tid: 0,
+  });
+
+  const { title, review, tid } = rowItem;
 
   //FUNCTIONS
+
   const addReviewToList = () => {
     if (title !== "" && review !== "") {
       setCounter(counter + 1);
@@ -37,8 +45,6 @@ const Dashboard = (props) => {
         createdAt: Date.now(),
       };
       setreviews((reviews) => [...reviews, row]);
-      setTitle("");
-      setReview("");
     } else {
       toast.error("All inputs are required");
     }
@@ -52,6 +58,37 @@ const Dashboard = (props) => {
     setReviewsIsEditable(!reviewsIsEditable);
   };
 
+  const upDateReviewsList = (tid, e) => {
+    let new_title, new_review;
+    let erow;
+
+    if (e.target.name === "title") {
+      new_title = e.target.value;
+      erow = reviews.map((item) => {
+        if (item.tid === tid) {
+          return { ...item, title: new_title };
+        }
+        return item;
+      });
+    } else {
+      new_review = e.target.value;
+      erow = reviews.map((item) => {
+        if (item.tid === tid) {
+          return { ...item, review: new_review };
+        }
+        return item;
+      });
+    }
+    setreviews(erow);
+  };
+
+  const onItemChange = (e) => {
+    setRowItem((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <>
       <Header />
@@ -61,8 +98,9 @@ const Dashboard = (props) => {
           <Col xl={5}>
             <Form.Control
               value={title}
+              name="title"
               onChange={(e) => {
-                setTitle(e.target.value);
+                onItemChange(e);
               }}
               type="text"
               placeholder="Type your title..."
@@ -71,8 +109,9 @@ const Dashboard = (props) => {
           <Col xl={5}>
             <Form.Control
               value={review}
+              name="review"
               onChange={(e) => {
-                setReview(e.target.value);
+                onItemChange(e);
               }}
               type="text"
               placeholder="Type your review..."
@@ -101,6 +140,7 @@ const Dashboard = (props) => {
                   <th>Review title</th>
                   <th>Review content</th>
                   <th>Date</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -109,7 +149,11 @@ const Dashboard = (props) => {
                     {reviews.map((item) => (
                       <>
                         {reviewsIsEditable ? (
-                          <RowEdit row={item} delete={deleteRowFromList} />
+                          <RowEdit
+                            row={item}
+                            delete={deleteRowFromList}
+                            upDateReviewsList={upDateReviewsList}
+                          />
                         ) : (
                           <tr>
                             <td>{item.tid}</td>
@@ -117,8 +161,18 @@ const Dashboard = (props) => {
                             <td>{item.review}</td>
                             <td>
                               {moment(item.createdAt).format(
-                                "DD/MM/YYYY hh:mm:ss"
+                                "DD/MM/YYYY hh:mm"
                               )}
+                            </td>
+                            <td>
+                              <NavLink
+                                className="btn btn-info"
+                                key={"reviewKey"}
+                                to="/review-details"
+                                state={{ reviewState: item }}
+                              >
+                                <FcNext size={22} color="#000000" />
+                              </NavLink>
                             </td>
                           </tr>
                         )}

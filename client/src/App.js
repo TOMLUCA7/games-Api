@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +12,6 @@ import Game from "./pages/Game";
 import Cart from "./pages/Cart";
 
 function App() {
-
   return (
     <>
       <Router>
@@ -21,6 +20,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/game" element={<Game />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/review-details" element={<Game />} />
         </Routes>
       </Router>
     </>
