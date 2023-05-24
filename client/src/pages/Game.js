@@ -22,7 +22,7 @@ const Game = (props) => {
 
   return (
     <>
-      <p style={{ color: "#ffff" }}>{reviewState.title}</p>;
+      <p style={{ color: "#ffff" }}>{reviewState.tid}</p>;
     </>
   );
 };
