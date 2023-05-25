@@ -166,6 +166,15 @@ const Login = (props) => {
                 >
                   Don't have an account? Signup Now!
                 </Button>
+                <Button
+                  style={{ marginTop: 12 }}
+                  variant="light"
+                  onClick={() => {
+                    setAuthView("");
+                  }}
+                >
+                  Forgot Password ? Change Now
+                </Button>
               </>
             ) : authView === "registerView" ? (
               <>
