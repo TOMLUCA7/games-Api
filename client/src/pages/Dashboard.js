@@ -12,7 +12,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/Header";
 import { FcPlus, FcEditImage, FcNext } from "react-icons/fc";
-import { CiLogout } from "react-icons/ci";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
@@ -90,11 +89,10 @@ const Dashboard = (props) => {
     }));
   };
 
-  const logOut = () => {
-    const auth = localStorage.getItem("token");
-    auth.clear();
-    auth.loctions.href("/");
-  };
+  // const logOut = () => {
+  //   localStorage.removeItem("token");
+  //   <NavLink to="/"></NavLink>;
+  // };
 
   return (
     <>
@@ -134,13 +132,6 @@ const Dashboard = (props) => {
               variant="outline-info"
             >
               <FcEditImage size={30} />
-            </Button>
-            <Button
-              style={{ marginLeft: 10 }}
-              onClick={logOut}
-              variant="danger"
-            >
-              <CiLogout size={30} />
             </Button>
           </Col>
         </Row>

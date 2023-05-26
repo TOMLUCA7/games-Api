@@ -1,8 +1,18 @@
 import React from "react";
-import { Navbar, Container, NavDropdown, Nav } from "react-bootstrap";
+import { Navbar, Container, NavDropdown, Nav, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { CiLogout } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 
-const Header = (props) => {
+const Header = () => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("token");
+    // window.location.href = "/";
+    navigate("/");
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -26,6 +36,9 @@ const Header = (props) => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <Button style={{ marginLeft: 10 }} onClick={logout} variant="danger">
+            <CiLogout size={30} />
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
