@@ -89,11 +89,6 @@ const Dashboard = (props) => {
     }));
   };
 
-  // const logOut = () => {
-  //   localStorage.removeItem("token");
-  //   <NavLink to="/"></NavLink>;
-  // };
-
   return (
     <>
       <Header />

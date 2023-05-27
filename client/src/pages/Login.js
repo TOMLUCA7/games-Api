@@ -15,6 +15,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [mobile, setMobile] = useState("");
   const [code, setCode] = useState("");
+  const [NewPassword, setNewPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -103,6 +104,8 @@ const Login = (props) => {
       toast.error("You didnt type any code");
     }
   };
+
+  const ChangePassword = () => {};
 
   return (
     <>
@@ -293,6 +296,34 @@ const Login = (props) => {
             ) : (
               <>
                 <h3 style={{ marginTop: 15 }}>Forget Password</h3>
+                <p>Please type your New Password</p>
+                <Form>
+                  <Form.Group>
+                    <Form.Control
+                      type="text"
+                      value={NewPassword}
+                      onChange={(e) => {
+                        setNewPassword(e.target.value);
+                      }}
+                    />
+                  </Form.Group>
+                  <Button
+                    variant="primary"
+                    style={{ width: "100%", marginTop: 15 }}
+                    onClick={ChangePassword}
+                  >
+                    Change Password
+                  </Button>
+                  <Button
+                    style={{ marginTop: 12 }}
+                    variant="light"
+                    onClick={() => {
+                      setAuthView("loginView");
+                    }}
+                  >
+                    Back to login
+                  </Button>
+                </Form>
               </>
             )}
           </Col>
