@@ -37,7 +37,7 @@ const Header = () => {
             </NavDropdown>
           </Nav>
           <Button style={{ marginLeft: 10 }} onClick={logout} variant="danger">
-            <CiLogout size={30} />
+            <CiLogout size={22} />
           </Button>
         </Navbar.Collapse>
       </Container>
