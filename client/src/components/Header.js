@@ -36,7 +36,11 @@ const Header = () => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Button style={{ marginLeft: 10 }} onClick={logout} variant="danger">
+          <Button
+            style={{ marginLeft: 10 }}
+            onClick={logout}
+            variant="outline-danger"
+          >
             <CiLogout size={22} />
           </Button>
         </Navbar.Collapse>

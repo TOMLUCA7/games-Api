@@ -4,6 +4,32 @@ import mongoose from "mongoose";
 import Account from "../models/account.js";
 import bcryptjs from "bcryptjs"; //Password crypt
 import jwt from "jsonwebtoken"; //Manage TOKENS
+import Device from "../models/device.js";
+
+router.post("/createDevice", async (req, res) => {
+  const device = req.body.device;
+  const id = new mongoose.Types.ObjectId();
+
+  const _device = new Device({
+    _id: id,
+    deviceName: device.deviceName,
+    price: device.price,
+    reviews: device.reviews,
+    gallery: device.gallery,
+  });
+  _device
+    .save()
+    .then((results) => {
+      res.status(200).json({
+        message: results,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: error.message,
+      });
+    });
+});
 
 router.post("/createAccount", async (req, res) => {
   const user = req.body.user;
