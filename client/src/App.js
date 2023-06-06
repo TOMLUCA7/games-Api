@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Game from "./pages/Game";
 import Cart from "./pages/Cart";
+import GameDetails from "./pages/GameDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/game" element={<Game />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/review-details" element={<Game />} />
+          <Route path="/game/:id" element={<GameDetails />} />
         </Routes>
       </Router>
     </>
