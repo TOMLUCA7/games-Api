@@ -26,9 +26,9 @@ const GameDetails = () => {
 
   return (
     <>
-      <h3
+      <h2
         style={{
-          color: "#fff",
+          color: "#13ffe3",
           marginLeft: "20%",
           marginTop: 80,
           width: "10%",
@@ -36,7 +36,7 @@ const GameDetails = () => {
         }}
       >
         Game Details
-      </h3>
+      </h2>
       <div
         style={{
           display: "flex",
@@ -51,19 +51,20 @@ const GameDetails = () => {
             marginLeft: "20%",
           }}
         >
-          <h3 style={{ color: "#fff" }}>Game Name: {gameDetails.gameName}</h3>
-          <h3 style={{ color: "#fff" }}>Game Price: {gameDetails.gamePrice}</h3>
-          <h3 style={{ color: "#fff" }}>
-            Game Description: {gameDetails.gameDescription}
-          </h3>
+          <h2 style={{ color: "#A2CEFF", fontSize: "bold" }}>Game Name:</h2>
+          <h3 style={{ color: "#F1A208" }}>{gameDetails.gameName}</h3>
+          <h2 style={{ color: "#A2CEFF" }}>Game Price:</h2>
+          <h3 style={{ color: "#F1A208" }}>{gameDetails.gamePrice} $</h3>
+          <h2 style={{ color: "#A2CEFF" }}>Game Description:</h2>
+          <h3 style={{ color: "#F1A208" }}>{gameDetails.gameDescription}</h3>
         </div>
         <img
           src={gameDetails.gameImage}
-          alt={gameDetails.gameName}
           style={{
             width: "30%",
             height: "10%",
             borderRadius: 20,
+            marginLeft: 20,
           }}
         />
       </div>
@@ -72,15 +73,3 @@ const GameDetails = () => {
 };
 
 export default GameDetails;
-
-{
-  /* <div>
-      <h1 style={{ color: "#fff" }}>Game Details</h1>
-      <h3 style={{ color: "#fff" }}>Game Name: {gameDetails.gameName}</h3>
-      <h3 style={{ color: "red" }}>Game Name: {gameDetails.gameImage}</h3>
-      <h3 style={{ color: "#fff" }}>Game Price: {gameDetails.gamePrice}</h3>
-      <h3 style={{ color: "#fff" }}>
-        Game Description: {gameDetails.gameDescription}
-      </h3>
-    </div> */
-}

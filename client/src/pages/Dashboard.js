@@ -50,11 +50,6 @@ const Dashboard = (props) => {
     setAllGenres(data.message);
   };
 
-  useEffect(() => {
-    loadAllGames();
-    loadGenres();
-  }, []);
-
   const DeleteGamesById = async (gid) => {
     try {
       const response = await fetch(`${baseURL}/deleteGame/:${gid}`, {
@@ -98,14 +93,19 @@ const Dashboard = (props) => {
     }
   };
 
+  useEffect(() => {
+    loadAllGames();
+    loadGenres();
+  }, []);
+
   return (
     <Container>
       <Header />
       <ToastContainer />
 
-      <Row>
+      {/* <Row>
         <Col></Col>
-      </Row>
+      </Row> */}
 
       <Row style={{ marginTop: 100 }}>
         <Col xl={12} xs={12}>
@@ -124,7 +124,7 @@ const Dashboard = (props) => {
                 </Col>
               ))
             ) : (
-              <p>NO GAMES</p>
+              <h1 style={{ color: "#fff" }}>YOU HAVE NO GAMES !</h1>
             )}
           </Row>
         </Col>

@@ -20,13 +20,6 @@ function GameItems(props) {
               <Button>View Details</Button>
             </NavLink>
           </Row>
-          {/* <Row>
-            <Col>
-              <Button variant="danger" onClick={props.DeleteGamesById}>
-                Delete
-              </Button>
-            </Col>
-          </Row> */}
         </Container>
       </Card.Body>
     </Card>
