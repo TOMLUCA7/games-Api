@@ -11,6 +11,8 @@ import Dashboard from "./pages/Dashboard";
 import Game from "./pages/Game";
 import Cart from "./pages/Cart";
 import GameDetails from "./pages/GameDetails";
+import GameCRUD from "./pages/GameCRUD";
+import ShoppingCart from "./pages/ShoppingCart";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/review-details" element={<Game />} />
           <Route path="/game/:id" element={<GameDetails />} />
+          <Route path="/GameCRUD" element={<GameCRUD />} />
+          <Route path="/ShoppingCart" element={<ShoppingCart />} />
         </Routes>
       </Router>
     </>

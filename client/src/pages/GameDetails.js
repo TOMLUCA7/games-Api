@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, useParams } from "react-router-dom";
+import Lottie from "lottie-web";
+import SecondHeader from "../components/SecondHeader";
 
 const GameDetails = () => {
   const baseURL = "http://localhost:3001/api";
   const { id } = useParams(); //  ךוקח את האיי די של אותו משחק
   const [gameDetails, setGameDetails] = useState(null);
+  const container = useRef(null);
 
   useEffect(() => {
     const fetchGameDetails = async () => {
@@ -20,12 +23,37 @@ const GameDetails = () => {
     fetchGameDetails();
   }, [id]);
 
+  // useEffect(() => {
+  //   Lottie.loadAnimation({
+  //     container: container.current, // the dom element that will contain the animation
+  //     renderer: "svg",
+  //     loop: true,
+  //     autoplay: true,
+  //     animationData: require("../images/118264-teenager-playing-video-games.json"),
+  //   });
+  // }, []);
+
   if (!gameDetails) {
-    return <h1 style={{ color: "#fff" }}>Loading...</h1>;
+    return (
+      <div
+        // style={{
+        //   width: "100%",
+        //   height: "100%",
+        //   display: "flex",
+        //   alignItems: "center",
+        //   justifyContent: "center",
+        // }}
+        // ref={container}
+        style={{ color: "#fff" }}
+      >
+        <h1>Loading ... </h1>
+      </div>
+    );
   }
 
   return (
     <>
+      <SecondHeader />
       <h2
         style={{
           color: "#13ffe3",

@@ -99,37 +99,34 @@ const Dashboard = (props) => {
   }, []);
 
   return (
-    <Container>
-      <Header />
-      <ToastContainer />
-
-      {/* <Row>
-        <Col></Col>
-      </Row> */}
-
-      <Row style={{ marginTop: 100 }}>
-        <Col xl={12} xs={12}>
-          <Row>
-            {games.length > 0 ? (
-              games.map((item) => (
-                <Col xl={3}>
-                  <GameItems
-                    DeleteGameClick={() => {
-                      {
-                        DeleteGamesById(item._id);
-                      }
-                    }}
-                    game={item}
-                  />
-                </Col>
-              ))
-            ) : (
-              <h1 style={{ color: "#fff" }}>YOU HAVE NO GAMES !</h1>
-            )}
-          </Row>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Header hideSeeAll={true} />
+      <Container>
+        {/* <ToastContainer /> */}
+        <Row style={{ marginTop: 90 }}>
+          <Col xl={12} xs={12}>
+            <Row>
+              {games.length > 0 ? (
+                games.map((item) => (
+                  <Col xl={3}>
+                    <GameItems
+                      DeleteGameClick={() => {
+                        {
+                          DeleteGamesById(item._id);
+                        }
+                      }}
+                      game={item}
+                    />
+                  </Col>
+                ))
+              ) : (
+                <h1 style={{ color: "#fff" }}>YOU HAVE NO GAMES !</h1>
+              )}
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

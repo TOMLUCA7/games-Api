@@ -9,8 +9,10 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CiLogout } from "react-icons/ci";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import { NavLink, Navigate, useNavigate, useLocation } from "react-router-dom";
+import GameDetails from "../pages/GameDetails";
 
 const Header = () => {
   const baseURL = "http://localhost:3001/api";
@@ -83,16 +85,14 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link href="/dashboard">Home</Nav.Link>
+              {/* <Nav.Link href="/GameCRUD">Game CRUD</Nav.Link> */}
+              <Nav.Link href="/ShoppingCart">
+                <AiOutlineShoppingCart size={22} color="#000" />
+              </Nav.Link>
             </Nav>
+
             <Form className="d-flex">
-              {/* <Form.Control
-                type="text"
-                placeholder="Search by name"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              /> */}
               <Form.Select
                 className="me-2"
                 value={selectedGenre}
@@ -106,18 +106,13 @@ const Header = () => {
                     </option>
                   ))}
               </Form.Select>
-              {/* <Form.Control
-                type="text"
-                placeholder="Price Range"
-                value={priceRange}
-                onChange={(e) => setPriceRange(e.target.value)}
-              /> */}
+
               <Button
                 className="ms-2"
                 variant="outline-primary"
                 onClick={handleFilter}
               >
-                Filter
+                Search
               </Button>
             </Form>
             <Button
@@ -131,7 +126,7 @@ const Header = () => {
         </Container>
       </Navbar>
 
-      <div style={{ marginTop: 10 }}>
+      <div style={{ marginTop: 10, marginLeft: "5%" }}>
         {searchResults && searchResults.length > 0 ? (
           searchResults.map((game) => (
             <div key={game._id}>
@@ -154,7 +149,7 @@ const Header = () => {
             </div>
           ))
         ) : (
-          <p style={{ color: "#fff" }}></p>
+          <span style={{ color: "#fff" }}></span>
         )}
       </div>
     </>
@@ -162,10 +157,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// {genres.length > 0 &&
-// genres.map((genre) => (
-//   <option key={genre._id} value={genre._id}>
-//     {genre.genreName}
-//   </option>
-// ))}

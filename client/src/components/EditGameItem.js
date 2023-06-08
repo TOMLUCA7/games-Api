@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const GameItem = (props) => {
+const EditGameItem = (props) => {
   const baseURL = "http://localhost:3001/api";
   const [isEditable, setIsEditable] = useState(false);
   const [gameName, setGameName] = useState(props.game.gameName);
@@ -109,4 +109,4 @@ const GameItem = (props) => {
   );
 };
 
-export default GameItem;
+export default EditGameItem;
