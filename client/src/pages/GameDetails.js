@@ -5,7 +5,7 @@ import SecondHeader from "../components/SecondHeader";
 
 const GameDetails = () => {
   const baseURL = "http://localhost:3001/api";
-  const { id } = useParams(); //  ךוקח את האיי די של אותו משחק
+  const { id } = useParams(); //  לוקח את האיי די של אותו משחק
   const [gameDetails, setGameDetails] = useState(null);
   const container = useRef(null);
 
@@ -52,19 +52,20 @@ const GameDetails = () => {
   }
 
   return (
-    <>
+    <div>
       <SecondHeader />
-      <h2
+      <h1
         style={{
-          color: "#13ffe3",
-          marginLeft: "20%",
+          color: "#ffffff",
+          marginLeft: "40%",
           marginTop: 80,
-          width: "10%",
-          height: "10%",
+          width: "50%",
+          height: "50%",
+          fontSize: 50,
         }}
       >
         Game Details
-      </h2>
+      </h1>
       <div
         style={{
           display: "flex",
@@ -75,16 +76,15 @@ const GameDetails = () => {
       >
         <div
           style={{
-            width: "50%",
-            marginLeft: "20%",
+            marginLeft: "10%",
           }}
         >
-          <h2 style={{ color: "#A2CEFF", fontSize: "bold" }}>Game Name:</h2>
-          <h3 style={{ color: "#F1A208" }}>{gameDetails.gameName}</h3>
-          <h2 style={{ color: "#A2CEFF" }}>Game Price:</h2>
-          <h3 style={{ color: "#F1A208" }}>{gameDetails.gamePrice} $</h3>
-          <h2 style={{ color: "#A2CEFF" }}>Game Description:</h2>
-          <h3 style={{ color: "#F1A208" }}>{gameDetails.gameDescription}</h3>
+          <h2 style={{ color: "#D64933", fontSize: "bold" }}>Game Name:</h2>
+          <h3 style={{ color: "#C5CBD3" }}>{gameDetails.gameName}</h3>
+          <h2 style={{ color: "#D64933" }}>Game Price:</h2>
+          <h3 style={{ color: "#C5CBD3" }}>{gameDetails.gamePrice} $</h3>
+          <h2 style={{ color: "#D64933" }}>Game Description:</h2>
+          <h3 style={{ color: "#C5CBD3" }}>{gameDetails.gameDescription}</h3>
         </div>
         <img
           src={gameDetails.gameImage}
@@ -96,7 +96,7 @@ const GameDetails = () => {
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
 

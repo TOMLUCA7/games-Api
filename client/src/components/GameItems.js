@@ -39,7 +39,8 @@ function GameItems({ game, card, setCard }) {
               </NavLink>
               {card && setCard && (
                 <Button
-                  style={{ marginTop: 10 }}
+                  variant="info"
+                  style={{ marginTop: 10, color: "#fff" }}
                   game={game}
                   onClick={() => {
                     if (setCard && card) setCard([...card, game]);

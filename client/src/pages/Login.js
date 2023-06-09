@@ -356,7 +356,6 @@ const Login = (props) => {
                       <Form.Group>
                         <Form.Label>Please Choos New Password</Form.Label>
                         <Form.Control
-                          className="forget-password-control"
                           type="password"
                           value={NewPassword}
                           placeholder="Type New Password..."
@@ -366,10 +365,9 @@ const Login = (props) => {
                         />
                         <Form.Control
                           style={{ marginTop: 15 }}
-                          className="forget-password-control"
                           type="password"
                           value={verifyNewPassword}
-                          placeholder="ReType New Password..."
+                          placeholder="Cnfiem New Password..."
                           onChange={(e) => {
                             setVerifyNewSound(e.target.value);
                           }}
@@ -381,6 +379,15 @@ const Login = (props) => {
                         onClick={changePassword}
                       >
                         change password
+                      </Button>
+                      <Button
+                        style={{ marginTop: 12 }}
+                        variant="light"
+                        onClick={() => {
+                          setAuthView("loginView");
+                        }}
+                      >
+                        Back to login
                       </Button>
                     </Form.Group>
                   ) : (
@@ -402,6 +409,15 @@ const Login = (props) => {
                         onClick={requestToChangePassword}
                       >
                         Reset
+                      </Button>
+                      <Button
+                        style={{ marginTop: 12 }}
+                        variant="light"
+                        onClick={() => {
+                          setAuthView("loginView");
+                        }}
+                      >
+                        Back to login
                       </Button>
                     </>
                   )}

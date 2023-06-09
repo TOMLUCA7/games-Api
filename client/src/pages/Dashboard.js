@@ -15,7 +15,6 @@ import { FcPlus, FcEditImage } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
-import RowEdit from "../components/RowEdit";
 import { NavLink } from "react-router-dom";
 import { VscChevronRight } from "react-icons/vsc";
 import axios from "axios";
@@ -56,16 +55,16 @@ const Dashboard = (props) => {
   }, []);
 
   return (
-    <>
+    <div>
       <Header card={card} />
       <Container>
         <ToastContainer />
         <Row style={{ marginTop: 90 }}>
-          <Col xl={12} xs={12}>
+          <Col>
             <Row>
               {games.length > 0 ? (
                 games.map((item) => (
-                  <Col xl={3}>
+                  <Col xl={3} style={{ marginTop: 15 }}>
                     <GameItems game={item} card={card} setCard={setCard} />
                   </Col>
                 ))
@@ -76,7 +75,7 @@ const Dashboard = (props) => {
           </Col>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 

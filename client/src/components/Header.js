@@ -131,28 +131,29 @@ const Header = ({ card }) => {
         </Container>
       </Navbar>
 
-      <div style={{ marginTop: 10, marginLeft: "5%" }}>
+      <div style={{ marginTop: 10, marginLeft: "3%" }}>
         {searchResults && searchResults.length > 0 ? (
-          searchResults.map((game) => (
-            <div key={game._id}>
-              <h4 style={{ color: "#A2CEFF" }}>{game.gameName}</h4>
-              <p style={{ color: "#F1A208" }}>
-                Genre: {game.genreId.genreName}
-              </p>
-              <p style={{ color: "green" }}>Price: {game.gamePrice} $</p>
-
-              <img
-                src={game.gameImage}
-                style={{
-                  width: "10%",
-                  height: "10%",
-                  borderRadius: 20,
-                  marginBottom: 15,
-                }}
-                alt="Game Image"
-              />
-            </div>
-          ))
+          <div>
+            {searchResults.map((game) => (
+              <div key={game._id}>
+                <h4 style={{ color: "#A2CEFF" }}>{game.gameName}</h4>
+                <p style={{ color: "#F1A208" }}>
+                  Genre: {game.genreId.genreName}
+                </p>
+                <p style={{ color: "green" }}>Price: {game.gamePrice} $</p>
+                <img
+                  src={game.gameImage}
+                  style={{
+                    width: "10%",
+                    height: "10%",
+                    borderRadius: 20,
+                    marginBottom: 15,
+                  }}
+                  alt="Game Image"
+                />
+              </div>
+            ))}
+          </div>
         ) : (
           <span style={{ color: "#fff" }}></span>
         )}
