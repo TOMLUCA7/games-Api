@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 const router = express.Router();
 import Game from "./models/game.js";
 import Genre from "./models/genre.js";
+import Account from "./models/account.js";
+import bcryptjs from "bcryptjs";
 
 router.post("/createGame", async (req, res) => {
   const { genreId, gameName, gamePrice, gameDescription, gameImage } = req.body;
@@ -198,6 +200,50 @@ router.get("/searchAllGames", async (req, res) => {
     .catch((error) => {
       return res.status(500).json({
         message: error.message,
+      });
+    });
+});
+
+router.put("/requestToChangePassword", async (req, res) => {
+  const { email } = req.body;
+  Account.findOne({ email: email })
+    .then((account) => {
+      if (account) {
+        return res.status(200).json({
+          permission: true,
+        });
+      } else {
+        return res.status(200).json({
+          permission: false,
+        });
+      }
+    })
+    .catch((error) => {
+      return res.status(500).json({
+        error: error.message,
+      });
+    });
+});
+
+router.put("/changePassword", async (req, res) => {
+  const { email, password } = req.body;
+  Account.findOne({ email: email })
+    .then(async (account) => {
+      const hash = await bcryptjs.hash(password, 10);
+      console.log(account);
+      account.password = hash;
+      return account.save().then(() => {
+        return res.status(200).json({
+          succses: true,
+        });
+      });
+    })
+    .catch((error) => {
+      console.log("====================================");
+      console.log(error);
+      console.log("====================================");
+      return res.status(500).json({
+        succses: false,
       });
     });
 });

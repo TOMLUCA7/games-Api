@@ -14,7 +14,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { NavLink, Navigate, useNavigate, useLocation } from "react-router-dom";
 import GameDetails from "../pages/GameDetails";
 
-const Header = () => {
+const Header = ({ card }) => {
   const baseURL = "http://localhost:3001/api";
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,6 +23,7 @@ const Header = () => {
   const [genres, setAllGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isItDashBoard, setisItDashBoard] = useState(false);
 
   const handleFilter = async () => {
     const queryParams = new URLSearchParams();
@@ -73,6 +74,7 @@ const Header = () => {
 
   useEffect(() => {
     loadGenres();
+    // handleFilter();
   }, []);
 
   return (
@@ -86,10 +88,14 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/dashboard">Home</Nav.Link>
-              {/* <Nav.Link href="/GameCRUD">Game CRUD</Nav.Link> */}
-              <Nav.Link href="/ShoppingCart">
+              <Nav.Link href="/AddGame">Add Game</Nav.Link>
+              <NavLink
+                style={{ marginTop: 5 }}
+                to="/ShoppingCart"
+                state={{ card: card }}
+              >
                 <AiOutlineShoppingCart size={22} color="#000" />
-              </Nav.Link>
+              </NavLink>
             </Nav>
 
             <Form className="d-flex">
@@ -106,7 +112,6 @@ const Header = () => {
                     </option>
                   ))}
               </Form.Select>
-
               <Button
                 className="ms-2"
                 variant="outline-primary"

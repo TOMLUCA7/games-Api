@@ -21,7 +21,6 @@ import { VscChevronRight } from "react-icons/vsc";
 import axios from "axios";
 import GameItems from "../components/GameItems";
 import Alert from "react-bootstrap/Alert";
-import "react-toastify/dist/ReactToastify.css";
 
 const Dashboard = (props) => {
   const baseURL = "http://localhost:3001/api";
@@ -33,6 +32,7 @@ const Dashboard = (props) => {
   const [selectedGamePrice, setSelectedGamePrice] = useState("");
   const [selectedDescription, setSelectedDesription] = useState("");
   const [selectedGameImage, setSelectedGameImage] = useState("");
+  const [card, setCard] = useState([]);
 
   const loadAllGames = async () => {
     const response = await fetch(baseURL + "/readAllGames", {
@@ -50,49 +50,6 @@ const Dashboard = (props) => {
     setAllGenres(data.message);
   };
 
-  const DeleteGamesById = async (gid) => {
-    try {
-      const response = await fetch(`${baseURL}/deleteGame/:${gid}`, {
-        method: "DELETE",
-      });
-      const data = await response.json();
-      toast.error(data.data);
-      loadAllGames();
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
-
-  const addNewGame = async () => {
-    if (
-      selectedGameName !== "" &&
-      selectedGamePrice !== "" &&
-      selectedGenre !== ""
-    ) {
-      const response = await fetch(baseURL + "/createGame", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          generId: selectedGenre,
-          gameName: selectedGameName,
-          gamePrice: selectedGamePrice,
-          gameDesc: selectedDescription,
-          gameImage: selectedGameImage,
-        }),
-      });
-
-      setSelectedGameName("");
-
-      const data = await response.json();
-      toast.success(`${data.message.gameName} was created`);
-      loadAllGames();
-    } else {
-      toast.error("Game name and price is required!!");
-    }
-  };
-
   useEffect(() => {
     loadAllGames();
     loadGenres();
@@ -100,23 +57,16 @@ const Dashboard = (props) => {
 
   return (
     <>
-      <Header hideSeeAll={true} />
+      <Header card={card} />
       <Container>
-        {/* <ToastContainer /> */}
+        <ToastContainer />
         <Row style={{ marginTop: 90 }}>
           <Col xl={12} xs={12}>
             <Row>
               {games.length > 0 ? (
                 games.map((item) => (
                   <Col xl={3}>
-                    <GameItems
-                      DeleteGameClick={() => {
-                        {
-                          DeleteGamesById(item._id);
-                        }
-                      }}
-                      game={item}
-                    />
+                    <GameItems game={item} card={card} setCard={setCard} />
                   </Col>
                 ))
               ) : (
