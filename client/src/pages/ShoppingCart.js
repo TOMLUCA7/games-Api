@@ -17,7 +17,12 @@ function ShoppingCart() {
     <>
       <SecondHeader />
       <div
-        style={{ width: "20%", height: "20%", marginLeft: 50, marginTop: 20 }}
+        style={{
+          width: "20%",
+          height: "20%",
+          marginLeft: 50,
+          marginTop: 20,
+        }}
       >
         {gamesInCart.length === 0 ? (
           <h1 style={{ color: "#fff" }}>Your shopping cart is empty.</h1>

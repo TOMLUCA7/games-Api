@@ -6,21 +6,6 @@ import { TbShoppingCartPlus } from "react-icons/tb";
 import ShoppingCart from "../pages/ShoppingCart";
 
 function GameItems({ game, card, setCard }) {
-  const gameArr = [{}];
-  const addItemToArray = () => {
-    gameArr.push(game);
-    console.log(gameArr);
-    localStorage.setItem("Cart", gameArr);
-  };
-
-  const AddArrToCart = () => {
-    localStorage.setItem("Cart", JSON.stringify(gameArr));
-  };
-
-  useEffect(() => {
-    // addItemToArray();
-  });
-
   return (
     <>
       <Card>
@@ -34,9 +19,11 @@ function GameItems({ game, card, setCard }) {
           <Card.Text>${game.gamePrice}</Card.Text>
           <Container>
             <Row>
+              {/* ניווט לעמוד פרטים לפי האיי די של כול מישחק */}
               <NavLink to={`/game/${game._id}`}>
                 <Button style={{ width: "100%" }}>View Details</Button>
               </NavLink>
+
               {card && setCard && (
                 <Button
                   variant="info"

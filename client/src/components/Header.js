@@ -1,22 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {
-  Navbar,
-  Container,
-  NavDropdown,
-  Nav,
-  Button,
-  Form,
-} from "react-bootstrap";
+import { Navbar, Container, Nav, Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CiLogout } from "react-icons/ci";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import { NavLink, Navigate, useNavigate, useLocation } from "react-router-dom";
-import GameDetails from "../pages/GameDetails";
 
 const Header = ({ card }) => {
   const baseURL = "http://localhost:3001/api";
   const navigate = useNavigate();
+
+  // מאפשר לגשת לאובייקט המיקום הנוכחי ברכיבים הפונקציונליים שלך
   const location = useLocation();
   const [priceRange, setPriceRange] = useState("");
   const [search, setSearch] = useState("");
@@ -26,20 +20,15 @@ const Header = ({ card }) => {
   const [isItDashBoard, setisItDashBoard] = useState(false);
 
   const handleFilter = async () => {
+    // המאפשר מניפולציה של פרמטרי השאילתה של כתובת URL.
     const queryParams = new URLSearchParams();
 
+    // אם SelectGenre זמין (לא null או לא מוגדר), הוא מוסיף פרמטר שאילתה לאובייקט URLSearchParams עם המפתח "genreId" והערך של selectedGenre. זה נעשה באמצעות שיטת set() של האובייקט URLSearchParams.
     if (selectedGenre) {
       queryParams.set("genreId", selectedGenre);
     }
 
-    if (priceRange) {
-      queryParams.set("priceRange", priceRange);
-    }
-
-    if (search) {
-      queryParams.set("search", encodeURIComponent(search));
-    }
-
+    // המשתנה searchUrl נבנה על ידי שילוב של כתובת האתר הבסיסית (baseURL) עם פרמטרי השאילתה מהאובייקט URLSearchParams. זה נעשה באמצעות שיטת toString() של האובייקט URLSearchParams.
     const searchUrl = `${baseURL}/searchAllGames?${queryParams.toString()}`;
 
     try {
@@ -52,6 +41,7 @@ const Header = ({ card }) => {
       console.error("Error fetching search results:", error);
     }
 
+    // לבסוף, הפונקציה navigate() נקראת כדי לנווט למיקום חדש. המיקום החדש נבנה על ידי הוספת פרמטרי השאילתה מהאובייקט URLSearchParams ל-location.pathname הנוכחי.
     navigate(`${location.pathname}?${queryParams.toString()}`);
   };
 
@@ -87,14 +77,18 @@ const Header = ({ card }) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/dashboard">Home</Nav.Link>
-              <Nav.Link href="/AddGame">Add Game</Nav.Link>
+              <Nav.Link style={{ color: "#000" }} href="/dashboard">
+                Home
+              </Nav.Link>
+              <Nav.Link style={{ color: "#000" }} href="/AddGame">
+                Add Game To Shop
+              </Nav.Link>
               <NavLink
                 style={{ marginTop: 5 }}
                 to="/ShoppingCart"
                 state={{ card: card }}
               >
-                <AiOutlineShoppingCart size={22} color="#000" />
+                <AiOutlineShoppingCart size={30} color="#000000" />
               </NavLink>
             </Nav>
 
@@ -136,11 +130,11 @@ const Header = ({ card }) => {
           <div>
             {searchResults.map((game) => (
               <div key={game._id}>
-                <h4 style={{ color: "#A2CEFF" }}>{game.gameName}</h4>
+                <h4 style={{ color: "#D64933" }}>{game.gameName}</h4>
                 <p style={{ color: "#F1A208" }}>
                   Genre: {game.genreId.genreName}
                 </p>
-                <p style={{ color: "green" }}>Price: {game.gamePrice} $</p>
+                <p style={{ color: "#fff" }}>Price: {game.gamePrice} $</p>
                 <img
                   src={game.gameImage}
                   style={{

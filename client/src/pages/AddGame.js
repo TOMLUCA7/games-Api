@@ -62,19 +62,6 @@ function AddGame() {
     }
   };
 
-  const DeleteGamesById = async (gid) => {
-    try {
-      const response = await fetch(`${baseURL}/deleteGame/:${gid}`, {
-        method: "DELETE",
-      });
-      const data = await response.json();
-      toast.error(data.data);
-      //   loadAllGames();
-    } catch (err) {
-      toast.error(err.message);
-    }
-  };
-
   const loadGenres = async () => {
     try {
       const response = await fetch(`${baseURL}/readAllGenres`, {

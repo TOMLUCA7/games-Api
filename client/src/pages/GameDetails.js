@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Route, useParams } from "react-router-dom";
+import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import Lottie from "lottie-web";
 import SecondHeader from "../components/SecondHeader";
+import { AiOutlineComment } from "react-icons/ai";
 
 const GameDetails = () => {
   const baseURL = "http://localhost:3001/api";
   const { id } = useParams(); //  לוקח את האיי די של אותו משחק
   const [gameDetails, setGameDetails] = useState(null);
   const container = useRef(null);
+  const [comments, setComments] = useState([]);
+  const [commentText, setCommentText] = useState("");
 
   useEffect(() => {
     const fetchGameDetails = async () => {
@@ -51,6 +55,13 @@ const GameDetails = () => {
     );
   }
 
+  const handleCommentSubmit = (event) => {
+    event.preventDefault();
+    const newComment = commentText;
+    setComments([...comments, newComment]);
+    setCommentText("");
+  };
+
   return (
     <div>
       <SecondHeader />
@@ -85,6 +96,39 @@ const GameDetails = () => {
           <h3 style={{ color: "#C5CBD3" }}>{gameDetails.gamePrice} $</h3>
           <h2 style={{ color: "#D64933" }}>Game Description:</h2>
           <h3 style={{ color: "#C5CBD3" }}>{gameDetails.gameDescription}</h3>
+
+          {/* comments */}
+          <div style={{ flexDirection: "row" }}>
+            <Form
+              style={{ width: "50%", flexDirection: "row" }}
+              onSubmit={handleCommentSubmit}
+            >
+              <Form.Label
+                style={{ color: "#fff", marginTop: 10, fontSize: 22 }}
+              >
+                Add Your Comment
+              </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Comment"
+                value={commentText}
+                onChange={(e) => {
+                  setCommentText(e.target.value);
+                }}
+              />
+              <Button style={{ marginTop: 10 }} variant="success" type="submit">
+                Add Comment
+              </Button>
+            </Form>
+          </div>
+          <h2 style={{ color: "#fff", marginTop: 8 }}>See Comments:</h2>
+          <ul>
+            {comments.map((comment, index) => (
+              <li style={{ color: "#C5CBD3", fontSize: 22 }} key={index}>
+                {comment}
+              </li>
+            ))}
+          </ul>
         </div>
         <img
           src={gameDetails.gameImage}
